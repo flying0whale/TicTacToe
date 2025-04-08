@@ -1,0 +1,123 @@
+﻿<Window x:Class="TicTacToe.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:icon="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
+        xmlns:local="clr-namespace:TicTacToe"
+        mc:Ignorable="d"
+        Title="GameWindow"
+        Height="590" Width="450"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" WindowStyle="None"
+        Background="Transparent" AllowsTransparency="True">
+
+    <Border Background="#252628">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition />
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!-- Title bar -->
+            <Border Grid.ColumnSpan="2"
+                    MouseLeftButtonDown="TitlebarMouseDown"
+                    Background="#65000000">
+                <Grid>
+                    <TextBlock Foreground="#e0e0e0"
+                               Text="Крестики-нолики"
+                               VerticalAlignment="Center"
+                               FontSize="18" FontWeight="DemiBold"
+                               Margin="5"/>
+
+                    <Button Width="32"
+                            Style="{StaticResource TitleBarButton}"
+                            HorizontalAlignment="Right"
+                            Click="CloseApp">
+                        <icon:MaterialIcon Kind="Close" />
+                    </Button>
+
+                </Grid>
+            </Border>
+            
+            <!--#region Player titles -->
+            <!-- Player 1 title -->
+            <StackPanel Grid.Row="1" VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Margin="35 0 0 0">
+                <TextBlock Text="Игрок 1"
+                            Style="{StaticResource Header}"/>
+
+                <TextBlock Text="Крестики"
+                            Foreground="IndianRed"
+                            Style="{StaticResource SubHead}"/>
+            </StackPanel>
+
+            <TextBlock Text="0" Foreground="#e0e0e0"
+                       x:Name="crossScoresText"
+                       FontSize="32" VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       Margin="0 0 20 0"
+                       Grid.Row="1"/>
+
+            <!-- Player 2 title -->
+            <TextBlock Text="0" Foreground="#e0e0e0"
+                       Grid.Row="1" Grid.Column="1"
+                       x:Name="circleScoresText"
+                       FontSize="32" VerticalAlignment="Center"
+                       Margin="20 0 0 0"/>
+
+            <StackPanel Grid.Row="1" Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0 0 35 0">
+                <TextBlock Text="Игрок 2"
+                           Style="{StaticResource Header}"/>
+
+                <TextBlock Text="Нолики"
+                           Foreground="LightGreen"
+                           Style="{StaticResource SubHead}"/>
+            </StackPanel>
+            <!--#endregion-->
+            
+            <TextBlock Grid.Row="2" Grid.ColumnSpan="2"
+                       Text="Победа!"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="78"
+                       Panel.ZIndex="1"
+                       FontWeight="DemiBold"
+                       x:Name="endgameText" Visibility="Collapsed"
+                       Foreground="#dcdc20"/>
+
+            <!-- Game field -->
+            <Border Grid.Row="2" Grid.ColumnSpan="2"
+                    BorderThickness="2"
+                    Background="Transparent"
+                    Width="400" Height="400"
+                    BorderBrush="DarkGray"
+                    MouseLeftButtonDown="FieldLeftMouseDown">
+                <Canvas x:Name="field"
+                        Width="400" Height="400"
+                        Margin="-2 -2 0 0"/>
+            </Border>
+
+            <Button Grid.Row="3" Content="Сбросить счёт"
+                    Style="{StaticResource ActionButton}"
+                    Click="ResetScore" VerticalAlignment="Center"/>
+            
+            <Button Grid.Row="3" Grid.Column="1"
+                    Content="Новая игра"
+                    Style="{StaticResource ActionButton}"
+                    Click="StartNewGame" VerticalAlignment="Center"/>
+
+        </Grid>
+    </Border>
+</Window>
+
